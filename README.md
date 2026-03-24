@@ -6,8 +6,8 @@ This is a quick implementation of Conway's Game of Life.
 
 There are two classes:
 
-- Life --> implements a classic GOL with modifiable rules
-- Gridui --> implements a graphical user interface for the Life class
+- Life (life.py) implements a classic GOL with modifiable rules
+- Gridui (gridui.py) implements a graphical user interface for the Life class
 
 ## Requirements
 
@@ -25,9 +25,13 @@ Graphical user interface:
 
 In the terminal, run `python3 gridui.py`
 
-### Changing the rules
+### Commands
 
+Commands for the GUI:
 
-
-
+- Escape    close the program
+- Space     toggle the simulation on / off
+- N         perform 1 step in the simulation while paused
+- R         fill the grid randomly
+- P         change the rule randomly
 

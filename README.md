@@ -11,7 +11,7 @@ There are two classes:
 
 ## Requirements
 
-The user interface uses the library (Pygame)[https://www.pygame.org/news]
+The user interface uses the library [Pygame](https://www.pygame.org/news)
 
 You can install by running `pip install pygame` in the terminal
 

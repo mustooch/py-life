@@ -29,6 +29,7 @@ class Grid:
         "tunnel": "B70941/S56734", # try with 1
         "squares": "B321675984/S316250974",
         "towers": "B3/S6479285",
+        "negative life": "B84723/S892461370",
     }
 
     check = ((-1, -1), (0, -1), (1, -1),

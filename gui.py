@@ -83,7 +83,6 @@ if __name__ == "__main__":
     #grid.set_rule(life.Grid.rules[sys.argv[1]])
     #grid.set_random_rule(4)
     #grid.set_rule("B059/S6845")
-    grid.set_rule("B3457/S")
     gui = Gridui(grid)
 
     gui.main()

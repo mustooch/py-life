@@ -35,3 +35,7 @@ Commands for the GUI:
 - R         fill the grid randomly
 - P         change the rule randomly
 
+Commands for the TUI:
+
+- q     End simulation and print the rule
+

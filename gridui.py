@@ -80,12 +80,11 @@ class Gridui:
 if __name__ == "__main__":
     grid = life.Grid(200, 200)
     grid.fill_random(0, 0, 200, 200)
-    #grid.set_rule(life.Grid.rules[sys.argv[1]])
-    #grid.set_random_rule(4)
-    #grid.set_rule("B059/S6845")
     grid.set_rule("B84723/S892461370")
-    gui = Gridui(grid)
 
-    gui.main()
+    gridui = Gridui(grid)
+    gridui.main()
+
+    # on exit
     print(grid.get_rule())
 

@@ -44,7 +44,6 @@ class Grid:
         self.char = [" ", "\u2588"]
         self.birth = ""
         self.survival = ""
-        self.interactive = True
 
     def __str__(self):
         return "\n".join("".join(self.char[1] if i == 1 else self.char[0] for i in row) for row in self.g)
@@ -117,40 +116,18 @@ class Grid:
     def count_alive(self):
         return sum(sum(row) for row in self.g)
 
-    def run(self, timer = 0.15):
-        while True:
-            os.system("clear")
-            print(self)
-            self.evolve()
-
-            if self.interactive:
-                stop = input()
-                if stop == "q":
-                    print(f"B{self.birth}/S{self.survival}")
-                    return
-            else:
-                sleep(timer)
-    
-
 if __name__ == "__main__":
-    grid = Grid(80, 20)
-    #grid.set_rule("B3/S23")
-    heuristic = 150
-    new_rules = []
+    grid = Grid(40, 20)
+    grid.set_rule(Grid.rules["life"])
+    grid.fill_random(10, 10, 60, 5)
 
-    for iter_rule in range(100):
-        grid.set_random_rule(4)
-        grid.fill_random(0, 0, grid.w, grid.h)
+    while True:
+        os.system("clear")
+        print(grid)
+        grid.evolve()
 
-        for i in range(100):
-            grid.evolve()
-
-        remaining = grid.count_alive()
-        print(remaining)
-        print(grid.get_rule())
-
-        if remaining > heuristic - 20 and remaining < heuristic + 20:
-            new_rules.append(grid.get_rule())
-
-    print(new_rules)
-
+        stop = input()
+        if stop == "q":
+            print(grid.get_rule())
+            break
+    

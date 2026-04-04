@@ -36,17 +36,23 @@ With [rule] being an optional rule name that is defined in the "rules" dictionar
 #### Commands for the GUI:
 
 Keyboard:
-- Escape    close the program
-- Space     toggle the simulation on / off
-- n         perform 1 step in the simulation while paused
-- r         randomly fill the entire grid
-- t         randomly fill some cells in the middle of the grid
-- p         change the rule randomly
-- c         change colors randomly
-- 0         clear the grid
-- g         toggle the grid overlay
+
+| Key    | Description
+| ------ | -----------
+| Escape | close the program
+| Space  | toggle the simulation on / off
+| n      | perform 1 step in the simulation while paused
+| r      | randomly fill the entire grid
+| t      | randomly fill some cells in the middle of the grid
+| p      | change the rule randomly
+| c      | change colors randomly
+| 0      | clear the grid
+| g      | toggle the grid overlay
 
 Mouse:
-- Left      set cell alive
-- Right     set cell dead
+
+| Button | Action
+| ------ | ------
+| Left   | set cell alive
+| Right  | set cell dead
 

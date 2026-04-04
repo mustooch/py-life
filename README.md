@@ -6,32 +6,34 @@ This is a quick implementation of Conway's Game of Life.
 
 There are two classes:
 
-- Grid (grid.py) implements a classic GOL grid with modifiable rules
-- Gui (gui.py) implements a graphical user interface for the Grid class
+- Grid (grid.py) implements a classic GOL grid with modifiable rules.
+- Gui (gui.py) implements a graphical user interface for the Grid class.
 
 ## Requirements
 
 The user interface uses the library [Pygame](https://www.pygame.org/news)
 
-You can install it by running `pip install pygame` in the terminal
+You can install it by running `pip install pygame` in the terminal.
 
-Or `apt install python3-pygame` if using Linux
+Or `apt install python3-pygame` if using Linux.
 
 ## Running the program
 
-Text-based user interface:
+### Text-based user interface:
 
-In the termianl, run `python3 grid.py`
+In the termianl, run `python3 grid.py`.
 
-Graphical user interface:
+#### Commands for the TUI:
 
-In the terminal, run `python3 gui.py [rule]`
+- q     End simulation and print the rule
 
-With [rule] being an optional rule name that is defined in the dictionary in the Grid class
+### Graphical user interface:
 
-### Commands
+In the terminal, run `python3 gui.py [rule]`.
 
-Commands for the GUI:
+With [rule] being an optional rule name that is defined in the "rules" dictionary of the Grid class.
+
+#### Commands for the GUI:
 
 Keyboard:
 - Escape    close the program
@@ -43,11 +45,8 @@ Keyboard:
 - c         change colors randomly
 - 0         clear the grid
 - g         toggle the grid overlay
+
 Mouse:
 - Left      set cell alive
 - Right     set cell dead
-
-Commands for the TUI:
-
-- q     End simulation and print the rule
 

@@ -25,7 +25,7 @@ In the termianl, run `python3 grid.py`.
 
 #### Commands for the TUI:
 
-- q     End simulation and print the rule
+- q : End simulation and print the rule
 
 ### Graphical user interface:
 

@@ -6,7 +6,7 @@ import life
 WIN_W = 800
 WIN_H = 800
 
-class Gridui:
+class Gui:
     def __init__(self, grid):
         pg.init()
         self.clock = pg.time.Clock()
@@ -82,8 +82,8 @@ if __name__ == "__main__":
     grid.fill_random(0, 0, 200, 200)
     grid.set_rule("B84723/S892461370")
 
-    gridui = Gridui(grid)
-    gridui.main()
+    gui = Gui(grid)
+    gui.main()
 
     # on exit
     print(grid.get_rule())

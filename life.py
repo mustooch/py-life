@@ -54,11 +54,11 @@ class Grid:
     def clear(self):
         self.g = [ [0 for i in range(self.w)] for j in range(self.h) ]
 
-    def set_cell(self, x, y, val = True):
-        self.g[y][x] = val
-
     def get_cell(self, x, y):
         return self.g[y][x]
+
+    def set_cell(self, x, y, val = True):
+        self.g[y][x] = val
 
     def get_rule(self):
         return f"B{self.birth}/S{self.survival}"

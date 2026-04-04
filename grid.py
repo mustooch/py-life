@@ -24,12 +24,14 @@ class Grid:
         "primordial soup": "B059/S6845",
         "static bugs": "B5416/S",
         "degaradation": "B743/S7936", # cool for a world generation
+        "map": "B86/S45137968", # also cool for map gen
         "static stoic": "B3457/S",
         "hungry": "B863/S30951",
         "tunnel": "B70941/S56734", # try with 1
         "squares": "B321675984/S316250974",
         "towers": "B3/S6479285",
         "negative life": "B84723/S892461370",
+        "chaotic life": "B3569/S23",
     }
 
     check = ((-1, -1), (0, -1), (1, -1),
@@ -60,6 +62,9 @@ class Grid:
     def set_cell(self, x, y, val = True):
         self.g[y][x] = val
 
+    def toggle_cell(self, x, y):
+        self.g[y][x] = not self.g[y][x]
+
     def get_rule(self):
         return f"B{self.birth}/S{self.survival}"
 
@@ -71,8 +76,8 @@ class Grid:
     def set_random_rule(self, n_max = 10):
         b = list("23456789")
         d = list("0123456789")
-        self.birth = ''.join(sample(b, randint(0, min(8, n_max))))
-        self.survival = ''.join(sample(d, randint(0, n_max)))
+        self.birth = ''.join(sorted(sample(b, randint(0, min(8, n_max)))))
+        self.survival = ''.join(sorted(sample(d, randint(0, n_max))))
 
     def fill_random(self, x, y, dx, dy):
         x = clamp(0, x, self.w)

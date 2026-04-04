@@ -43,10 +43,9 @@ Keyboard:
 - c         change colors randomly
 - 0         clear the grid
 - g         toggle the grid overlay
-
 Mouse:
-- Left      make cell alive
-- Right     make cell dead
+- Left      set cell alive
+- Right     set cell dead
 
 Commands for the TUI:
 

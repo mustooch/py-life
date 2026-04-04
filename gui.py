@@ -22,6 +22,7 @@ class Gui:
         self.loop = True
         self.game_loop = False
         self.fps = 60
+        self.overlay = True
 
         self.set_random_colors()
 
@@ -37,6 +38,24 @@ class Gui:
             randint(150, 255),
         )
 
+    def draw_overlay(self):
+        for x in range(0, self.w):
+            pg.draw.line(
+                self.surface,
+                #(120, 120, 120),
+                self.bg_col,
+                (x * self.tile_w, 0), (x * self.tile_w, WIN_H),
+            )
+
+        for y in range(0, self.h):
+            pg.draw.line(
+                self.surface,
+                #(120, 120, 120),
+                self.bg_col,
+                (0, y * self.tile_h), (WIN_W, y * self.tile_h),
+            )
+
+
     def draw(self):
         self.surface.fill(self.bg_col)
 
@@ -48,6 +67,9 @@ class Gui:
                         self.tile_col,
                         (row * self.tile_w, col * self.tile_h, self.tile_w, self.tile_h),
                     )
+        if self.overlay:
+            self.draw_overlay()
+
         pg.display.update()
 
     def handle_key_event(self, key):
@@ -76,6 +98,9 @@ class Gui:
 
         elif key == pg.K_c:
             self.set_random_colors()
+
+        elif key == pg.K_g:
+            self.overlay = not self.overlay
 
     def handle_mouse(self):
         mouse1, mouse2, mouse3 = pg.mouse.get_pressed()

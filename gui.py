@@ -19,7 +19,7 @@ class Gui:
         self.loop = True
         self.game_loop = False
         self.fps = 30
-        self.overlay = True
+        self.overlay = False
 
         self.set_random_colors()
 
@@ -88,7 +88,11 @@ class Gui:
 
         elif key == pg.K_t:
             self.grid.clear()
-            self.grid.fill_random(80, 80, 40, 40)
+            size_x = int(self.grid.w / 4)
+            size_y = int(self.grid.h / 4)
+            start_x = int(self.grid.w / 2 - size_x / 2)
+            start_y = int(self.grid.h / 2 - size_y / 2)
+            self.grid.fill_random(start_x, start_y, size_x, size_y)
 
         elif key == pg.K_p:
             self.grid.set_random_rule()

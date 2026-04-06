@@ -105,6 +105,9 @@ class Grid:
             self.w += 1
 
     def decrease_size(self, n = 1):
+        if self.w < 10 or self.h < 10:
+            return
+
         for i in range(n):
             # remove row below
             self.g.pop()

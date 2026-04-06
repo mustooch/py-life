@@ -21,17 +21,18 @@ class Grid:
         "anneal": "B4678/S35678",
 
         # rules i found
-        "primordial soup": "B059/S6845",
-        "static bugs": "B5416/S",
-        "degaradation": "B743/S7936", # cool for a world generation
-        "map": "B86/S45137968", # also cool for map gen
-        "static stoic": "B3457/S",
-        "hungry": "B863/S30951",
-        "tunnel": "B70941/S56734", # try with 1
-        "squares": "B321675984/S316250974",
-        "towers": "B3/S6479285",
-        "negative life": "B84723/S892461370",
+        "soup": "B059/S4568",
+        "bugs": "B1456/S",
+        "degrade": "B347/S3679", # cool for a world generation
+        "map": "B68/S13456789", # also cool for map gen
+        "static": "B3457/S",
+        "hungry": "B368/S01359",
+        "tunnel": "B01479/S34567", # try with 1
+        "squares": "B123456789/S012345679",
+        "towers": "B3/S2456789",
+        "negative life": "B23478/S012346789", # life but 1 and 0 are sawpped
         "chaotic life": "B3569/S23",
+        "cheese": "B23679/S01245679",
     }
 
     check = ((-1, -1), (0, -1), (1, -1),
@@ -42,7 +43,7 @@ class Grid:
     def __init__(self, w, h):
         self.w = w
         self.h = h
-        self.g = [ [0 for i in range(w)] for j in range(h) ]
+        self.g = [[0 for i in range(w)] for j in range(h)]
         self.char = [" ", "\u2588"]
         self.birth = ""
         self.survival = ""
@@ -92,6 +93,31 @@ class Grid:
     def fill_random_all(self):
         self.fill_random(0, 0, self.w, self.h)
 
+    def increase_size(self, n = 1):
+        for i in range(n):
+            # add row below
+            self.g.append([0 for i in range(self.w)])
+            self.h += 1
+
+            # add column to the right
+            for i in range(self.h):
+                self.g[i].append(0)
+            self.w += 1
+
+    def decrease_size(self, n = 1):
+        for i in range(n):
+            # remove row below
+            self.g.pop()
+            self.h -= 1
+
+            # remove column to the right
+            for i in range(self.h):
+                self.g[i].pop()
+            self.w -= 1
+
+    def count_alive(self):
+        return sum(sum(row) for row in self.g)
+
     def evolve(self):
         new_g = [ [0 for i in range(self.w)] for j in range(self.h) ]
 
@@ -118,8 +144,6 @@ class Grid:
 
         self.g = new_g
 
-    def count_alive(self):
-        return sum(sum(row) for row in self.g)
 
 if __name__ == "__main__":
     grid = Grid(40, 20)

@@ -10,10 +10,7 @@ WIN_H = 800
 class Gui:
     def __init__(self, grid):
         self.grid = grid
-        self.w = self.grid.w
-        self.h = self.grid.h
-        self.tile_w = float(WIN_W / self.w)
-        self.tile_h = float(WIN_H / self.h)
+        self.update_size()
 
         pg.init()
         self.clock = pg.time.Clock()
@@ -21,10 +18,16 @@ class Gui:
         self.surface = pg.display.set_mode((WIN_W, WIN_H))
         self.loop = True
         self.game_loop = False
-        self.fps = 60
+        self.fps = 30
         self.overlay = True
 
         self.set_random_colors()
+
+    def update_size(self):
+        self.w = self.grid.w
+        self.h = self.grid.h
+        self.tile_w = float(WIN_W / self.w)
+        self.tile_h = float(WIN_H / self.h)
 
     def set_random_colors(self):
         self.bg_col = (
@@ -39,19 +42,20 @@ class Gui:
         )
 
     def draw_overlay(self):
+        #line_color = (120, 120, 120)
+        line_color = self.bg_col
+
         for x in range(0, self.w):
             pg.draw.line(
                 self.surface,
-                #(120, 120, 120),
-                self.bg_col,
+                line_color,
                 (x * self.tile_w, 0), (x * self.tile_w, WIN_H),
             )
 
         for y in range(0, self.h):
             pg.draw.line(
                 self.surface,
-                #(120, 120, 120),
-                self.bg_col,
+                line_color,
                 (0, y * self.tile_h), (WIN_W, y * self.tile_h),
             )
 
@@ -102,7 +106,7 @@ class Gui:
         elif key == pg.K_g:
             self.overlay = not self.overlay
 
-    def handle_mouse(self):
+    def handle_mouse_clicked(self):
         mouse1, mouse2, mouse3 = pg.mouse.get_pressed()
         mx, my = pg.mouse.get_pos()
         mx = math.floor(mx / self.tile_w)
@@ -116,6 +120,14 @@ class Gui:
             # right click
             self.grid.set_cell(mx, my, False)
 
+    def handle_mouse_wheel(self, y):
+        if y < 0:
+            self.grid.increase_size()
+        elif y > 0:
+            self.grid.decrease_size()
+
+        self.update_size()
+
     def main(self):
         while self.loop:
             self.draw()
@@ -128,7 +140,10 @@ class Gui:
                 elif event.type == pg.KEYDOWN:
                     self.handle_key_event(event.key)
 
-            self.handle_mouse()
+                elif event.type == pg.MOUSEWHEEL:
+                    self.handle_mouse_wheel(event.y)
+
+            self.handle_mouse_clicked()
 
             self.clock.tick(self.fps)
 

@@ -47,7 +47,6 @@ Keyboard:
 | p      | change the rule randomly
 | c      | change colors randomly
 | 0      | clear the grid
-| g      | toggle the grid overlay
 
 Mouse:
 
@@ -55,4 +54,5 @@ Mouse:
 | ------ | ------
 | Left   | set cell alive
 | Right  | set cell dead
+| Wheel  | increase/decrease grid size
 

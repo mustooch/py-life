@@ -37,16 +37,17 @@ With [rule] being an optional rule name that is defined in the "rules" dictionar
 
 Keyboard:
 
-| Key    | Description
-| ------ | -----------
-| Escape | close the program
-| Space  | toggle the simulation on / off
-| n      | perform 1 step in the simulation while paused
-| r      | randomly fill the entire grid
-| t      | randomly fill some cells in the middle of the grid
-| p      | change the rule randomly
-| c      | change colors randomly
-| 0      | clear the grid
+| Key     | Description
+| ------  | -----------
+| Escape  | close the program
+| Space   | toggle the simulation on / off
+| n       | perform 1 step in the simulation while paused
+| r       | randomly fill the entire grid
+| t       | randomly fill some cells in the middle of the grid
+| p       | change the rule randomly
+| shift+P | pick a random rule from the dictionary
+| c       | change colors randomly
+| 0       | clear the grid
 
 Mouse:
 

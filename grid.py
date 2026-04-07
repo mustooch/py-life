@@ -1,6 +1,6 @@
 import os
 from time import sleep
-from random import randint, sample
+import random
 
 def clamp(a, b, c):
     return min(max(a, b), c)
@@ -33,7 +33,11 @@ class Grid:
         "negative life": "B23478/S012346789", # life but 1 and 0 are sawpped
         "chaotic life": "B3569/S23",
         "cheese": "B23679/S01245679",
+        "ripples": "B3457/S8",
     }
+
+    def get_random_rule_name(self):
+        return random.choice(list(self.rules.keys()))
 
     check = ((-1, -1), (0, -1), (1, -1),
              (-1, 0),           (1, 0),
@@ -77,8 +81,8 @@ class Grid:
     def set_random_rule(self, n_max = 10):
         b = list("23456789")
         d = list("0123456789")
-        self.birth = ''.join(sorted(sample(b, randint(0, min(8, n_max)))))
-        self.survival = ''.join(sorted(sample(d, randint(0, n_max))))
+        self.birth = ''.join(sorted(random.sample(b, random.randint(0, min(8, n_max)))))
+        self.survival = ''.join(sorted(random.sample(d, random.randint(0, n_max))))
 
     def fill_random(self, x, y, dx, dy):
         x = clamp(0, x, self.w)
@@ -88,7 +92,7 @@ class Grid:
 
         for i in range(y, y + dy):
             for j in range(x, x + dx):
-                self.g[i][j] = randint(0, 1)
+                self.g[i][j] = random.randint(0, 1)
 
     def fill_random_all(self):
         self.fill_random(0, 0, self.w, self.h)
@@ -147,9 +151,9 @@ class Grid:
 
         self.g = new_g
 
-
 if __name__ == "__main__":
-    grid = Grid(40, 20)
+    grid = Grid(60, 20)
+
     grid.set_rule(Grid.rules["life"])
     grid.fill_random(10, 10, 60, 5)
 

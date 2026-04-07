@@ -14,7 +14,7 @@ class Grid:
         "life": "B3/S23",
         "34 life": "B34/S34",
         "diamoeba": "B35678/S5678",
-        "2x2": "B36/125",
+        "2x2": "B36/S125",
         "highlife": "B36/S23",
         "day and night": "B3678/S34678",
         "morley": "B368/S245",
@@ -27,7 +27,7 @@ class Grid:
         "map": "B68/S13456789", # also cool for map gen
         "static": "B3457/S",
         "hungry": "B368/S01359",
-        "tunnel": "B01479/S34567", # try with 1
+        "tunnel": "B1479/S34567", # try with 1
         "squares": "B123456789/S012345679",
         "towers": "B3/S2456789",
         "negative life": "B23478/S012346789", # life but 1 and 0 are sawpped

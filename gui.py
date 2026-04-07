@@ -59,7 +59,6 @@ class Gui:
                 (0, y * self.tile_h), (WIN_W, y * self.tile_h),
             )
 
-
     def draw(self):
         self.surface.fill(self.bg_col)
 
@@ -95,8 +94,13 @@ class Gui:
             self.grid.fill_random(start_x, start_y, size_x, size_y)
 
         elif key == pg.K_p:
-            self.grid.set_random_rule()
-            pg.display.set_caption(self.grid.get_rule())
+            if pg.key.get_mods() & pg.KMOD_SHIFT:
+                rule_name = self.grid.get_random_rule_name()
+                self.grid.set_rule(grid.rules[rule_name])
+                pg.display.set_caption(rule_name)
+            else:
+                self.grid.set_random_rule()
+                pg.display.set_caption(self.grid.get_rule())
 
         elif key == pg.K_0:
             self.grid.clear()

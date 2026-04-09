@@ -5,17 +5,43 @@ import pygame as pg
 from grid import Grid
 
 WIN_W = 800
-WIN_H = 800
+WIN_H = 600
+
+pg.init()
+pg.font.init()
+
+class Button:
+    font = pg.font.SysFont("Monospace", 16)
+
+    def __init__(self, rect, color, text, on_click):
+        self.rect = rect
+        self.color = color
+        self.text = text
+        self.text_surface = self.font.render(self.text, False, (0, 0, 0))
+        self.on_click = on_click
+
+    def check_clicked_fire(self, mx, my):
+        if self.rect.collidepoint(mx, my):
+            print("clicked")
+            self.on_click()
+    
+    def draw(self, surface):
+        pg.draw.rect(
+            surface,
+            self.color,
+            self.rect
+        )
+
+        surface.blit(self.text_surface, (self.rect.x, self.rect.y))
 
 class Gui:
     def __init__(self, grid):
         self.grid = grid
         self.update_size()
 
-        pg.init()
-        self.clock = pg.time.Clock()
         pg.display.set_caption("Life")
         self.surface = pg.display.set_mode((WIN_W, WIN_H))
+        self.clock = pg.time.Clock()
         self.loop = True
         self.game_loop = False
         self.fps = 30
@@ -23,11 +49,38 @@ class Gui:
 
         self.set_random_colors()
 
+        self.buttons = [
+            Button(
+                pg.Rect(640, 20, 100, 20),
+                (200, 200, 200),
+                "clear",
+                self.grid.clear
+            ),
+            Button(
+                pg.Rect(640, 60, 100, 20),
+                (200, 200, 200),
+                "random",
+                self.grid.fill_random_all
+            ),
+            Button(
+                pg.Rect(640, 100, 100, 20),
+                (200, 200, 200),
+                "play/pause",
+                self.toggle_game_loop
+            )
+        ]
+    
+    def toggle_game_loop(self):
+        self.game_loop = not self.game_loop
+
     def update_size(self):
-        self.w = self.grid.w
-        self.h = self.grid.h
-        self.tile_w = float(WIN_W / self.w)
-        self.tile_h = float(WIN_H / self.h)
+        self.tile_w = float(WIN_W / self.grid.w)
+        self.tile_h = float(WIN_H / self.grid.h)
+
+        # take the smaller to make a square that fits the screen
+        smaller = min(self.tile_w, self.tile_h)
+        self.tile_w = smaller
+        self.tile_h = smaller
 
     def set_random_colors(self):
         self.bg_col = (
@@ -45,14 +98,14 @@ class Gui:
         #line_color = (120, 120, 120)
         line_color = self.bg_col
 
-        for x in range(0, self.w):
+        for x in range(0, self.grid.w):
             pg.draw.line(
                 self.surface,
                 line_color,
                 (x * self.tile_w, 0), (x * self.tile_w, WIN_H),
             )
 
-        for y in range(0, self.h):
+        for y in range(0, self.grid.h):
             pg.draw.line(
                 self.surface,
                 line_color,
@@ -72,10 +125,37 @@ class Gui:
                     )
         if self.overlay:
             self.draw_overlay()
+        
+        self.draw_buttons()
+
+        pg.draw.line(
+            self.surface,
+            (150, 150, 150),
+            (self.grid.w * self.tile_w, 0), (self.grid.w * self.tile_w, WIN_H),
+            4
+        )
 
         pg.display.update()
 
-    def handle_key_event(self, key):
+    def draw_buttons(self):
+        for button in self.buttons:
+            button.draw(self.surface)
+
+    def update_buttons(self, mx, my):
+        for button in self.buttons:
+            button.check_clicked_fire(mx, my)
+
+    def handle_mouse_button_down(self, pos, button):
+        mx, my = pos
+
+        # on left click
+        if button == 1:
+            # check all buttons
+            for button in self.buttons:
+                button.check_clicked_fire(mx, my)
+
+
+    def handle_key_down(self, key):
         if key == pg.K_ESCAPE:
             self.loop = False
 
@@ -114,19 +194,25 @@ class Gui:
         elif key == pg.K_g:
             self.overlay = not self.overlay
 
-    def handle_mouse_clicked(self):
+    def handle_mouse_pressed(self):
         mouse1, mouse2, mouse3 = pg.mouse.get_pressed()
         mx, my = pg.mouse.get_pos()
-        mx = math.floor(mx / self.tile_w)
-        my = math.floor(my / self.tile_h)
+        gx = math.floor(mx / self.tile_w)
+        gy = math.floor(my / self.tile_h)
         
+        # left click
         if mouse1:
-            # left click
-            self.grid.set_cell(mx, my, True)
 
+            # clicked inside grid
+            if gx < self.grid.w: 
+                self.grid.set_cell(gx, gy, True)
+
+        # right click
         elif mouse3:
-            # right click
-            self.grid.set_cell(mx, my, False)
+
+            # clicked inside grid
+            if gx < self.grid.w: 
+                self.grid.set_cell(gx, gy, False)
 
     def handle_mouse_wheel(self, y):
         if y < 0:
@@ -146,12 +232,15 @@ class Gui:
                     self.loop = False
 
                 elif event.type == pg.KEYDOWN:
-                    self.handle_key_event(event.key)
+                    self.handle_key_down(event.key)
+
+                elif event.type == pg.MOUSEBUTTONDOWN:
+                    self.handle_mouse_button_down(event.pos, event.button)
 
                 elif event.type == pg.MOUSEWHEEL:
                     self.handle_mouse_wheel(event.y)
 
-            self.handle_mouse_clicked()
+            self.handle_mouse_pressed()
 
             self.clock.tick(self.fps)
 

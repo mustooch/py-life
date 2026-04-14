@@ -4,10 +4,11 @@ This is a quick implementation of Conway's Game of Life.
 
 ## Program structure
 
-There are two classes:
+There are three classes:
 
 - Grid (grid.py) implements a classic GOL grid with modifiable rules.
 - Gui (gui.py) implements a graphical user interface for the Grid class.
+- Button (gui.py) implements a simple button that can trigger functions when clicked
 
 ## Requirements
 

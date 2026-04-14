@@ -34,6 +34,7 @@ class Grid:
         "chaotic life": "B3569/S23",
         "cheese": "B23679/S01245679",
         "ripples": "B3457/S8",
+        "stacks": "B2/S01245679",
     }
 
     def get_random_rule_name(self):

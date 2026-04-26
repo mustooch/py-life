@@ -2,6 +2,8 @@
 
 This is a quick implementation of Conway's Game of Life.
 
+By George Moussa and Alexandre Tresgots
+
 ## Program structure
 
 There are three classes:

@@ -36,6 +36,7 @@ class Grid:
         "ripples": "B3457/S8",
         "painting": "B2/S01245679",
         "painting 2": "B28/S124679",
+        "4-5": "B5678/S45678",
     }
 
     def get_random_rule_name():
